@@ -1,0 +1,14 @@
+{% extends 'components/base.html' %}
+{% load static %}
+{% block content %}
+<head>
+    <title>{% block title %}Index{% endblock %}</title>
+</head>
+<div>
+    <form>
+        {{ form }}
+    </form>
+    <a href="{% url 'obtener_solicitudes' %}">Obtener Solicitudes</a>
+    <a href="{% url 'pruebas' %}">Ir a Pruebas</a>
+</div>
+{% endblock %}

@@ -1,0 +1,189 @@
+{% extends 'components/base.html' %}
+{% load static %}
+{% block content %}
+<div>
+    <h4>Formulario Solicitudes</h4>
+    <form method="post" action="{% url 'pruebas' %}">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Fecha: {{ formSolicitud.fecha }}</td>
+                <td>Hora: {{ formSolicitud.hora }}</td>
+            </tr>
+            <tr>
+                <td>Solicitante: {{ formSolicitud.fkRutSolicitante }}</td>
+                <td>Asistente Social: {{ formSolicitud.fkRutAsistenteSocial }}</td>
+            </tr>
+            <tr>
+                <td>Nombre del Caso: {{ formSolicitud.nombre }}</td>
+            </tr>
+            <tr>
+                <td>Beneficio: {{ formSolicitud.beneficio }}</td>
+                <td>N° Beneficios: {{ formSolicitud.cantidadBeneficios }}</td>
+            </tr>
+            <tr>
+                <td>
+                    <button name="guardarSolicitud">Guardar Solicitud</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <h6>Solicitudes</h6>
+    <p>
+        {% for solicitud in dataSolicitud %}
+            {{ solicitud.fecha }}--{{ solicitud.hora }}--{{ solicitud.fkRutSolicitante }}--{{ solicitud.fkRutAsistenteSocial }}--{{ solicitud.nombre }}--{{ solicitud.beneficio }}--{{ solicitud.cantidadBeneficios }}
+        {% endfor %}
+    </p>
+
+    <h3>Formulario de Calle</h3>
+    <table>
+        <form method="post" action="{% url 'pruebas' %}">
+            {% csrf_token %}
+            <td>Nombre de Calle: {{ formCalle.nombre }}</td>
+            <td>Numero: {{ formCalle.numero }}</td>
+            <td>Avenida: {{ formCalle.avenida }}</td>
+            <td><button name="guardarCalle">Guardar Calle</button></td>
+        </form>
+    </table>
+    <h6>Calles</h6>
+    <p>
+        {% for calle in dataCalle %}
+            {{ calle.idCalle }}--{{ calle.nombre }}--{{ calle.numero }}--{{ calle.avenida }},
+        {% endfor %}
+    </p>
+
+    <h3>Formulario de Comuna</h3>
+    <table>
+        <form method="post" action="{% url 'pruebas' %}">
+            {% csrf_token %}
+            <td>Nombre Comuna: {{ formComuna.nombre }}</td>
+            <td><button name="guardarComuna">Guardar Comuna</button></td>
+        </form>
+    </table>
+    <h6>Comunas</h6>
+    <p>
+        {% for comuna in dataComuna %}
+            {{ comuna.idComuna }}--{{ comuna.nombre }},
+        {% endfor %}
+    </p>
+
+    <h3>Formulario Region</h3>
+    <table>
+        <form method="post" action="{% url 'pruebas' %}">
+            {% csrf_token %}
+            <td>Nombre Region: {{ formRegion.nombre }}</td>
+            <td><button name="guardarRegion">Guardar Region</button></td>
+        </form>
+    </table>
+    <h6>Regiones</h6>
+    <p>
+        {% for region in dataRegion %}
+            {{ region.idRegion }}--{{ region.nombre }},
+        {% endfor %}
+    </p>
+
+    <h3>Formulario Direcciones</h3>
+    <table>
+        <form method="post" action="{% url 'pruebas' %}">
+            {% csrf_token %}
+            <td>Comuna: {{ formDireccion.fkComuna }}</td>
+            <td>Region: {{ formDireccion.fkRegion }}</td>
+            <td>Calle: {{ formDireccion.fkCalle }}</td>
+            <td><button name="guardarDireccion">Guardar Dirección</button></td>
+        </form>
+    </table>
+    <h6>Direcciones</h6>
+    <p>
+        {% for direccion in dataDireccion %}
+            {{ direccion.idDireccion }}--{{ direccion.fkComuna }}--{{ direccion.fkRegion }}--{{ direccion.fkCalle }},
+        {% endfor %}
+    </p>
+
+    <h3>Formulario Asistente Social</h3>
+    <table>
+        <form method="post" action="{% url 'pruebas' %}">
+            {% csrf_token %}
+            <tr><td>Rut: {{ formAsistenteSocial.rutAsistenteSocial }}</td></tr>
+            <tr>
+                <td>Nombres: {{ formAsistenteSocial.nombres }}</td>
+                <td>Apellidos: {{ formAsistenteSocial.apellidos }}</td>
+            </tr>
+            <tr>
+                <td>Telefono: {{ formAsistenteSocial.telefono }}</td>
+                <td>Edad: {{ formAsistenteSocial.edad }}</td>
+            </tr>
+            <tr>
+                <td>Correo: {{ formAsistenteSocial.correo }}</td>
+                <td>fkDireccion: {{ formAsistenteSocial.fkDireccion }}</td>
+            </tr>
+            <tr><td><button name="guardarAsistenteSocial">Guardar Asistente Social</button></td></tr>
+        </form>
+    </table>
+    <h6>Asistente Social</h6>
+    <p>
+        {% for asistenteSocial in dataAsistenteSocial %}
+            {{ asistenteSocial.rutAsistenteSocial }}--{{ asistenteSocial.nombres }}--{{ asistenteSocial.apellidos }}--{{ asistenteSocial.telefono }}--{{ asistenteSocial.edad }}--{{ asistenteSocial.correo }}--{{ asistenteSocial.fkDireccion }},
+        {% endfor %}
+    </p>
+
+    <h3>Formulario Detalle Direcciones</h3>
+    <table>
+        <form method="post" action="{% url 'pruebas' %}">
+            {% csrf_token %}
+            <tr>
+                <td>Casa: {{ formDetalleDireccion.casa }}</td>
+                <td>Poblacion/Villa/Condominio: {{ formDetalleDireccion.poblacion_villa_condominio }}</td>
+                <td>Unidad Vecinal: {{ formDetalleDireccion.unidadVecinal }}</td>
+            </tr>
+            <tr>
+                <td>Depto: {{ formDetalleDireccion.depto }}</td>
+                <td>Block/Edificio: {{ formDetalleDireccion.block_edificio }}</td>
+            </tr>
+            <tr><td><button name="guardarDetalleDireccion">Guardar Detalle Direccion</button></td></tr>
+        </form>
+    </table>
+    <h6>Detalle Direcciones</h6>
+    <p>
+        {% for detalleDireccion in dataDetalleDireccion %}
+            {{ detalleDireccion.idDetalleDireccion }}--{{ detalleDireccion.casa }}--{{ detalleDireccion.poblacion_villa_condominio }}--{{ detalleDireccion.unidadVecinal }}--{{ detalleDireccion.depto }}--{{ detalleDireccion.block_edificio }},
+        {% endfor %}
+    </p>
+
+    <h3>Formulario Solicitante</h3>
+    <table>
+        <form method="post" action="{% url 'pruebas' %}">
+            {% csrf_token %}
+            <tr>
+                <td>Rut: {{ formSolicitante.rutSolicitante }}</td>
+                <td>Primer Nombre: {{ formSolicitante.primerNombre }}</td>
+                <td>Segundo Nombre:{{ formSolicitante.segundoNombre }}</td>
+            </tr>
+            <tr>
+                <td>Primer Apellido: {{ formSolicitante.primerApellido }}</td>
+                <td>Segundo Apellido: {{ formSolicitante.segundoApellido }}</td>
+            </tr>
+            <tr>
+                <td>Telefono: {{ formSolicitante.telefono }}</td>
+                <td>Edad: {{ formSolicitante.edad }}</td>
+            </tr>
+            <tr>
+                <td>Correo: {{ formSolicitante.correo }}</td>
+                <td>Grupo Familiar: {{ formSolicitante.grupoFamiliar }}</td>
+            </tr>
+            <tr>
+                <td>fkDireccion: {{ formSolicitante.fkDireccion }}</td>
+                <td>fkDetalleDireccion: {{ formSolicitante.fkDetalleDireccion }}</td>
+            </tr>
+            <tr><td><button name="guardarSolicitante">Guardar Solicitante</button></td></tr>
+        </form>
+    </table>
+    <h6>Solicitante</h6>
+    <p>
+        {% for solicitante in dataSolcitante %}
+            {{ solicitante.rutSolicitante }}--{{ solicitante.primerNombre }}--{{ solicitante.segundoNombre }}--{{ solicitante.primerApellido }}--{{ solicitante.segundoApellido }}--{{ solicitante.telefono }}--{{ solicitante.edad }}--{{ solicitante.correo }}--{{ solicitante.grupoFamiliar }}--{{ solicitante.fkDireccion }}--{{ solicitante.fkDetalleDireccion }},
+        {% endfor %}
+    </p>
+
+    <a href="{% url 'index' %}">Volver</a>
+</div>
+{% endblock %}
