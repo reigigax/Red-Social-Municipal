@@ -15,87 +15,44 @@
                 <td>Asistente Social: {{ formSolicitud.fkRutAsistenteSocial }}</td>
             </tr>
             <tr>
-                <td>Nombre del Caso: {{ formSolicitud.nombre }}</td>
+                <td>Nombre del Caso: {{ formSolicitud.nombreCasoSolicitud }}</td>
             </tr>
             <tr>
                 <td>Beneficio: {{ formSolicitud.beneficio }}</td>
                 <td>N° Beneficios: {{ formSolicitud.cantidadBeneficios }}</td>
+            <tr>
+                <td>descripcionBeneficio: {{ formSolicitud.descripcionBeneficio }}</td>
+                <td>nombreCalle: {{ formSolicitud.nombreCalle }}</td>
             </tr>
             <tr>
-                <td>
-                    <button name="guardarSolicitud">Guardar Solicitud</button>
-                </td>
+                <td>numeroCalle: {{ formSolicitud.numeroCalle }}</td>
+                <td>nombreAvenida: {{ formSolicitud.nombreAvenida }}</td>
+            <tr>
+            <tr>
+                <td>nombreComuna: {{ formSolicitud.nombreComuna }}</td>
+                <td>nombreRegion: {{ formSolicitud.nombreRegion }}</td>
+            <tr>
+            <tr>
+                <td>casa: {{ formSolicitud.casa }}</td>
+                <td>poblacion_villa_condominio: {{ formSolicitud.poblacion_villa_condominio }}</td>
+            <tr>
+            <tr>
+                <td>unidadVecinal: {{ formSolicitud.unidadVecinal }}</td>
+                <td>depto: {{ formSolicitud.depto }}</td>
+            <tr>
+            <tr>
+                <td>block_edificio: {{ formSolicitud.block_edificio }}</td>
+            <tr>
+            <td>
+                <button name="guardarSolicitud">Guardar Solicitud</button>
+            </td>
             </tr>
         </table>
     </form>
     <h6>Solicitudes</h6>
     <p>
         {% for solicitud in dataSolicitud %}
-            {{ solicitud.fecha }}--{{ solicitud.hora }}--{{ solicitud.fkRutSolicitante }}--{{ solicitud.fkRutAsistenteSocial }}--{{ solicitud.nombre }}--{{ solicitud.beneficio }}--{{ solicitud.cantidadBeneficios }}
-        {% endfor %}
-    </p>
-
-    <h3>Formulario de Calle</h3>
-    <table>
-        <form method="post" action="{% url 'pruebas' %}">
-            {% csrf_token %}
-            <td>Nombre de Calle: {{ formCalle.nombre }}</td>
-            <td>Numero: {{ formCalle.numero }}</td>
-            <td>Avenida: {{ formCalle.avenida }}</td>
-            <td><button name="guardarCalle">Guardar Calle</button></td>
-        </form>
-    </table>
-    <h6>Calles</h6>
-    <p>
-        {% for calle in dataCalle %}
-            {{ calle.idCalle }}--{{ calle.nombre }}--{{ calle.numero }}--{{ calle.avenida }},
-        {% endfor %}
-    </p>
-
-    <h3>Formulario de Comuna</h3>
-    <table>
-        <form method="post" action="{% url 'pruebas' %}">
-            {% csrf_token %}
-            <td>Nombre Comuna: {{ formComuna.nombre }}</td>
-            <td><button name="guardarComuna">Guardar Comuna</button></td>
-        </form>
-    </table>
-    <h6>Comunas</h6>
-    <p>
-        {% for comuna in dataComuna %}
-            {{ comuna.idComuna }}--{{ comuna.nombre }},
-        {% endfor %}
-    </p>
-
-    <h3>Formulario Region</h3>
-    <table>
-        <form method="post" action="{% url 'pruebas' %}">
-            {% csrf_token %}
-            <td>Nombre Region: {{ formRegion.nombre }}</td>
-            <td><button name="guardarRegion">Guardar Region</button></td>
-        </form>
-    </table>
-    <h6>Regiones</h6>
-    <p>
-        {% for region in dataRegion %}
-            {{ region.idRegion }}--{{ region.nombre }},
-        {% endfor %}
-    </p>
-
-    <h3>Formulario Direcciones</h3>
-    <table>
-        <form method="post" action="{% url 'pruebas' %}">
-            {% csrf_token %}
-            <td>Comuna: {{ formDireccion.fkComuna }}</td>
-            <td>Region: {{ formDireccion.fkRegion }}</td>
-            <td>Calle: {{ formDireccion.fkCalle }}</td>
-            <td><button name="guardarDireccion">Guardar Dirección</button></td>
-        </form>
-    </table>
-    <h6>Direcciones</h6>
-    <p>
-        {% for direccion in dataDireccion %}
-            {{ direccion.idDireccion }}--{{ direccion.fkComuna }}--{{ direccion.fkRegion }}--{{ direccion.fkCalle }},
+            {{ solicitud.numeroSolicitud }}--{{ solicitud.nombreCasoSolicitud }}--{{ solicitud.beneficio }}--{{ solicitud.descripcionBeneficio }}--{{ solicitud.cantidadBeneficios }}--{{ solicitud.hora }}--{{ solicitud.fecha }}--{{ solicitud.nombreCalle }}--{{ solicitud.numeroCalle }}--{{ solicitud.nombreAvenida }}--{{ solicitud.nombreComuna }}--{{ solicitud.nombreRegion }}--{{ solicitud.casa }}--{{ solicitud.poblacion_villa_condominio }}--{{ solicitud.unidadVecinal }}--{{ solicitud.depto }}--{{ solicitud.block_edificio }}--{{ solicitud.fkRutAsistenteSocial }}--{{ solicitud.fkRutSolicitante }}
         {% endfor %}
     </p>
 
@@ -123,29 +80,6 @@
     <p>
         {% for asistenteSocial in dataAsistenteSocial %}
             {{ asistenteSocial.rutAsistenteSocial }}--{{ asistenteSocial.nombres }}--{{ asistenteSocial.apellidos }}--{{ asistenteSocial.telefono }}--{{ asistenteSocial.edad }}--{{ asistenteSocial.correo }}--{{ asistenteSocial.fkDireccion }},
-        {% endfor %}
-    </p>
-
-    <h3>Formulario Detalle Direcciones</h3>
-    <table>
-        <form method="post" action="{% url 'pruebas' %}">
-            {% csrf_token %}
-            <tr>
-                <td>Casa: {{ formDetalleDireccion.casa }}</td>
-                <td>Poblacion/Villa/Condominio: {{ formDetalleDireccion.poblacion_villa_condominio }}</td>
-                <td>Unidad Vecinal: {{ formDetalleDireccion.unidadVecinal }}</td>
-            </tr>
-            <tr>
-                <td>Depto: {{ formDetalleDireccion.depto }}</td>
-                <td>Block/Edificio: {{ formDetalleDireccion.block_edificio }}</td>
-            </tr>
-            <tr><td><button name="guardarDetalleDireccion">Guardar Detalle Direccion</button></td></tr>
-        </form>
-    </table>
-    <h6>Detalle Direcciones</h6>
-    <p>
-        {% for detalleDireccion in dataDetalleDireccion %}
-            {{ detalleDireccion.idDetalleDireccion }}--{{ detalleDireccion.casa }}--{{ detalleDireccion.poblacion_villa_condominio }}--{{ detalleDireccion.unidadVecinal }}--{{ detalleDireccion.depto }}--{{ detalleDireccion.block_edificio }},
         {% endfor %}
     </p>
 

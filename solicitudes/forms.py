@@ -1,7 +1,8 @@
 from django import forms
 from django.utils.timezone import now, localtime
 from .models import Solicitud, Solicitante, Asistente_Social
-
+from django.core.exceptions import ValidationError
+import re
 
 class SolicitudForm(forms.ModelForm): 
     class Meta:
@@ -14,6 +15,14 @@ class SolicitudForm(forms.ModelForm):
             'fkRutAsistenteSocial':'Asistente Social',
             'fkRutSolicitante':'Solicitante',
             'descripcionBeneficio':'Descripción del Beneficio',
+
+            'nombreCalle': 'Calle',
+            'numeroCalle': 'Numero',
+            'nombreAvenida': 'Avenida',
+
+            'nombreComuna': 'Comuna',
+            'nombreRegion': 'Region',
+
             'casa': 'Casa',
             'poblacion_villa_condominio': 'Población/Villa/Condominio',
             'unidadVecinal': 'Unidad Vecinal',
@@ -50,6 +59,8 @@ class SolicitudForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields['fecha'].initial = localtime(now()).date()
         self.fields['hora'].initial = localtime(now()).time()
+        self.fields['fkRutAsistenteSocial'].empty_label = None
+        self.fields['fkRutSolicitante'].empty_label = None
         self.fields['fkRutAsistenteSocial'].choices = [('', 'Selecciona un Asistene Social')] + list(self.fields['fkRutAsistenteSocial'].choices)
         self.fields['fkRutSolicitante'].choices = [('', 'Selecciona un Solicitante')] + list(self.fields['fkRutSolicitante'].choices)
 
@@ -75,3 +86,25 @@ class SolicitanteForm(forms.ModelForm):
     class Meta:
         model = Solicitante
         fields = ['rutSolicitante', 'primerNombre', 'segundoNombre', 'primerApellido', 'segundoApellido', 'telefono', 'edad', 'correo', 'grupoFamiliar']
+        labels = {
+            'rutSolicitante': 'RUN Solicitante',
+            'primerNombre': 'Primer Nombre',
+            'segundoNombre': 'Segundo Nombre',
+            'primerApellido': 'Primer Apellido',
+            'segundoApellido': 'Segundo Apellido',
+            'telefono': 'Telefono',
+            'edad': 'Edad',
+            'correo': 'Correo',
+            'grupoFamiliar': 'Grupo Familiar',
+        }
+        widgets = {
+            'rutSolicitante': forms.TextInput(attrs={'class':'form-control', 'placeholder':'RUN de Solicitante'}),
+            'primerNombre': forms.TextInput(attrs={'class':'form-control','placeholder':'Primer Nombre'}),
+            'segundoNombre': forms.TextInput(attrs={'class':'form-control','placeholder':'Segundo Nombre o Nombres'}),
+            'primerApellido': forms.TextInput(attrs={'class':'form-control','placeholder':'Primer Apellido'}),
+            'segundoApellido': forms.TextInput(attrs={'class':'form-control','placeholder':'Segundo Apellido o Apellidos'}),
+            'telefono': forms.NumberInput(attrs={'class':'form-control','placeholder':'Numero de Telefono'}),
+            'edad': forms.NumberInput(attrs={'class':'form-control','placeholder':'Edad'}),
+            'correo': forms.EmailInput(attrs={'class':'form-control','placeholder':'Correo del Solicitante'}),
+            'grupoFamiliar': forms.TextInput(attrs={'class':'form-control','placeholder':'Grupo Familiar'}),
+        }

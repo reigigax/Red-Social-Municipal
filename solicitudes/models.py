@@ -1,6 +1,6 @@
 from django.db import models
 
-# Create your models here.
+#  Create your models here.
 
 class Asistente_Social(models.Model):
     rutAsistenteSocial = models.CharField(max_length=13, primary_key=True)
@@ -17,12 +17,12 @@ class Asistente_Social(models.Model):
 class Solicitante(models.Model):
     rutSolicitante = models.CharField(max_length=13, primary_key=True)
     primerNombre = models.CharField(max_length=100, blank=False, null=False)
-    segundoNombre = models.CharField(max_length=160, blank=False, null=False)
+    segundoNombre = models.CharField(max_length=160, blank=True, null=True)
     primerApellido = models.CharField(max_length=100, blank=False, null=False)
-    segundoApellido = models.CharField(max_length=160, blank=False, null=False)
+    segundoApellido = models.CharField(max_length=160, blank=True, null=True)
     telefono = models.IntegerField(blank=False, null=False)
     edad = models.IntegerField(blank=False, null=False)
-    correo = models.CharField(max_length=150, blank=False, null=False)
+    correo = models.EmailField(max_length=150, blank=False, null=False)
     grupoFamiliar = models.CharField(max_length=150, blank=False, null=False)
 
     def __str__(self):
@@ -48,8 +48,8 @@ class Solicitud(models.Model):
     casa = models.CharField(max_length=90, blank=False, null=False)
     poblacion_villa_condominio = models.CharField(max_length=90, blank=False, null=False)
     unidadVecinal = models.CharField(max_length=90, blank=False, null=False)
-    depto = models.CharField(max_length=90, blank=False, default='Sin Especificar')
-    block_edificio = models.CharField(max_length=90, blank=False, default='Sin Especificar')
+    depto = models.CharField(max_length=90, blank=True, default='Sin Especificar')
+    block_edificio = models.CharField(max_length=90, blank=True, default='Sin Especificar')
 
     fkRutAsistenteSocial = models.ForeignKey('Asistente_Social', on_delete=models.CASCADE, db_column='rutAsistenteSocial')
     fkRutSolicitante = models.ForeignKey('Solicitante', on_delete=models.CASCADE, db_column='rutSolicitante')

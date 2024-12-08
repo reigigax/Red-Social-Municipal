@@ -8,7 +8,7 @@
             <div class="col-auto"></div>
             <div class="col">
                 <div class="bg-secondary-subtle card">
-                    <div class="d-flex mb-3 bg-dark-subtle card-header">
+                    <div class="d-flex mb-3 text-secondary bg-dark-subtle card-header">
                         <div class="me-auto p-2">Nueva Solicitud</div>
                         <div class="p-2">
                             <div class="container text-center">
@@ -20,22 +20,20 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form class="row g-3" method="post" action="{% url 'pruebas' %}"><!--<form class="row g-3" method="post" action="{% url 'obtener_solicitudes' %}">--> 
+                        <form class="row g-3" method="post">
                             {% csrf_token %}
                             <div class="col-12 fs-4 fw-light">Detalle del Beneficio</div>
                             <div class="col-md-6 d-none">
-                                {{ formSolicitud.fecha.label_tag }}
                                 {{ formSolicitud.fecha }}
                             </div>
                             <div class="col-md-6 d-none">
-                                {{ formSolicitud.hora.label_tag }}
                                 {{ formSolicitud.hora }}
                             </div>
-                            <div class="col-12 fs-6">
+                            <div class="col-12">
                                 {{ formSolicitud.nombreCasoSolicitud.label_tag }} <span class="text-danger">*</span>
                                 {{ formSolicitud.nombreCasoSolicitud }}
                             </div>
-                            <div class="col-6">
+                            <div class="col-md-6">
                                 {{ formSolicitud.fkRutSolicitante.label_tag }} <span class="text-danger">*</span>
                                 {{ formSolicitud.fkRutSolicitante }}
                             </div>
@@ -55,46 +53,58 @@
                                 {{ formSolicitud.descripcionBeneficio.label_tag }}
                                 {{ formSolicitud.descripcionBeneficio }}
                             </div>
+
                             <div class="col-12 fs-4 fw-light">Dirección del Hogar</div>
-                            <div class="col-4">
-                                {{ formSolicitud.nombreCalle.label_tag }}
-                                {{ formSolicitud.nombreCalle }}
-                            </div>
-                            <div class="col-2">
-                                {{ formSolicitud.numeroCalle.label_tag }}
+                            <div class="col-md-5">
+                                {{ formSolicitud.nombreCalle.label_tag }} <span class="text-danger">*</span>
+                                {{ formSolicitud.nombreCalle }} 
+                            </div>  
+                            <div class="col-md-2">
+                                {{ formSolicitud.numeroCalle.label_tag }} <span class="text-danger">*</span>
                                 {{ formSolicitud.numeroCalle }}
                             </div>
-                            <div class="col-md-6">
-                                {{ formSolicitud.nombreAvenida.label_tag }}
+                            <div class="col-md-5">
+                                {{ formSolicitud.nombreAvenida.label_tag }} <span class="text-danger">*</span>
                                 {{ formSolicitud.nombreAvenida }}
                             </div>
                             <div class="col-md-6">
-                                {{ formSolicitud.nombreComuna.label_tag }}
+                                {{ formSolicitud.nombreComuna.label_tag }} <span class="text-danger">*</span>
                                 {{ formSolicitud.nombreComuna }}
                             </div>
                             <div class="col-md-6">
-                                {{ formSolicitud.nombreRegion.label_tag }}
+                                {{ formSolicitud.nombreRegion.label_tag }} <span class="text-danger">*</span>
                                 {{ formSolicitud.nombreRegion }}
                             </div>
-                            <div class="col-12 fs-4 fw-light">Detalle Dirección</div>
-                            <div class="col-md-6">
+                            
+                            <div class="col-12 fs-4 fw-light">Detalle de la Dirección</div>
+                            <div class="col-md-4">
                                 {{ formSolicitud.casa.label_tag }} <span class="text-danger">*</span>
                                 {{ formSolicitud.casa }}
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
+                                {{ formSolicitud.poblacion_villa_condominio.label_tag }} <span class="text-danger">*</span>
+                                {{ formSolicitud.poblacion_villa_condominio }}
+                            </div>
+                            <div class="col-md-4">    
                                 {{ formSolicitud.unidadVecinal.label_tag }} <span class="text-danger">*</span>
                                 {{ formSolicitud.unidadVecinal }}
-                            </div>                        
+                            </div>
                             <div class="col-md-6">
-                                {{ formSolicitud.depto.label_tag }}
+                                {{ formSolicitud.depto.label_tag }} 
                                 {{ formSolicitud.depto }}
                             </div>
                             <div class="col-md-6">
-                                {{ formSolicitud.block_edificio.label_tag }}
+                                {{ formSolicitud.block_edificio.label_tag }} 
                                 {{ formSolicitud.block_edificio }}
                             </div>
-                            <div class="col-12">
-                                <button class="btn btn-primary" name="guardarSolicitud">Guardar Solicitud</button>
+                            <div class="col"></div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end margin-default">
+                                <div class="col-2 d-grid gap-2">
+                                    <a class="btn btn-secondary" href="{% url 'index' %}">Volver</a>
+                                </div>
+                                <div class="col-2 d-grid gap-2">
+                                    <button class="btn btn-primary" type="submit" name="guardarSolicitud">Guardar Solicitud</button>
+                                </div>
                             </div>
                         </form>
                     </div>

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from datetime import datetime
 from .models import Solicitud, Solicitante, Asistente_Social
 from .forms import SolicitudForm, SolicitanteForm, AsistenteSocialForm
@@ -41,6 +41,7 @@ def addSolicitud(request):
     if 'guardarSolicitud' in request.POST:
         formSolicitud = SolicitudForm(request.POST)
         formSolicitud.save()
+        return redirect('obtener_solicitudes')
 
     context['formSolicitud'] = formSolicitud
 
@@ -48,10 +49,20 @@ def addSolicitud(request):
 
 def addSolicitante(request):
     context = {}
+    formSolicitante = SolicitanteForm(request.POST)
+
+    if formSolicitante.is_valid():
+        formSolicitante.save()
+        return redirect('index')
+
+    context['formSolicitante'] = formSolicitante
+
     return render(request, 'solicitante/solicitante_add.html', context)
 
 def getSolicitudes(request):
     context = {}
+    dataSolicitudes = Solicitud.objects.all()
+    context['dataSolicitudes'] = dataSolicitudes
     return render(request, 'solicitud/solicitud_get.html', context)
 
 
