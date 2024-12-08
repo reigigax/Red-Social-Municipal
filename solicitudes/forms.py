@@ -1,26 +1,46 @@
 from django import forms
 from django.utils.timezone import now, localtime
-from .models import Solicitud, Solicitante, Detalle_Direccion, Asistente_Social, Direccion, Region, Comuna, Calle
+from .models import Solicitud, Solicitante, Asistente_Social
 
 
 class SolicitudForm(forms.ModelForm): 
     class Meta:
         model = Solicitud
-        fields = ['nombre', 'beneficio', 'cantidadBeneficios', 'hora', 'fecha', 'fkRutAsistenteSocial', 'fkRutSolicitante']
+        fields = ['nombreCasoSolicitud', 'beneficio', 'cantidadBeneficios', 'hora', 'fecha', 'fkRutAsistenteSocial', 'fkRutSolicitante', 'descripcionBeneficio','nombreCalle','numeroCalle', 'nombreAvenida','nombreComuna','nombreRegion','casa', 'poblacion_villa_condominio', 'unidadVecinal', 'depto', 'block_edificio']
         labels = {
-            'nombre':'Nombre del Caso',
+            'nombreCasoSolicitud':'Nombre del Caso',
             'beneficio':'Tipo de Beneficio',
             'cantidadBeneficios':'N° Beneficios',
             'fkRutAsistenteSocial':'Asistente Social',
-            'fkRutSolicitante':'Solicitante'
+            'fkRutSolicitante':'Solicitante',
+            'descripcionBeneficio':'Descripción del Beneficio',
+            'casa': 'Casa',
+            'poblacion_villa_condominio': 'Población/Villa/Condominio',
+            'unidadVecinal': 'Unidad Vecinal',
+            'depto': 'Departamento',
+            'block_edificio': 'Block/Edificio'
         }
         widgets = {
-            'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingresa el Nombre del Caso'}),
+            'nombreCasoSolicitud': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingresa el Nombre del Caso'}),
             'beneficio': forms.TextInput(attrs={'class': 'form-control','placeholder':'Tipo/s de Beneficio/s'}),
             'cantidadBeneficios': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'N° Beneficios'}),
+            'descripcionBeneficio': forms.Textarea(attrs={'rows': 4 ,'class': 'form-control', 'placeholder': 'Descripción del Beneficio y Detalles del Solicitante'}),
 
             'fecha': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'hora': forms.TimeInput(format='%H:%M', attrs={'type': 'time','class': 'form-control'}),
+            
+            'nombreCalle': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Nombre de la Calle'}),
+            'numeroCalle': forms.NumberInput(attrs={'class':'form-control', 'placeholder':'N° de la Calle'}),
+            'nombreAvenida': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Nombre de la Avenida'}),
+
+            'nombreComuna': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Nombre de la Comuna'}),
+            'nombreRegion': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Nombre de la Region'}),
+
+            'casa': forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Ingresar Casa'}),
+            'poblacion_villa_condominio': forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Población/Villa/Condominio'}),
+            'unidadVecinal': forms.NumberInput(attrs={'class': 'form-control', 'placeholder':'N° Unidad Vecinal'}),
+            'depto': forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Ingresar Departamento'}),
+            'block_edificio': forms.TextInput(attrs={'class': 'form-control', 'placeholder':'Block/Edificio'}),
 
             'fkRutAsistenteSocial': forms.Select(attrs={'class': 'form-select'}),
             'fkRutSolicitante': forms.Select(attrs={'class': 'form-select'}),
@@ -45,37 +65,13 @@ class SolicitudForm(forms.ModelForm):
         return cleaned_data
 
 
-class CalleForm(forms.ModelForm):
-    class Meta:
-        model = Calle
-        fields = ['nombre', 'numero', 'avenida']
-
-class ComunaForm(forms.ModelForm):
-    class Meta:
-        model = Comuna
-        fields = ['nombre']
-
-class RegionForm(forms.ModelForm):
-    class Meta:
-        model = Region
-        fields = ['nombre']
-
-class DireccionForm(forms.ModelForm):
-    class Meta:
-        model = Direccion
-        fields = ['fkRegion', 'fkComuna', 'fkCalle']
-
 class AsistenteSocialForm(forms.ModelForm):
     class Meta:
         model = Asistente_Social
-        fields = ['rutAsistenteSocial', 'nombres', 'apellidos', 'telefono', 'edad', 'correo', 'fkDireccion']
+        fields = ['rutAsistenteSocial', 'nombres', 'apellidos', 'telefono', 'edad', 'correo']
 
-class DetalleDireccionForm(forms.ModelForm):
-    class Meta:
-        model = Detalle_Direccion
-        fields = ['casa', 'poblacion_villa_condominio', 'unidadVecinal', 'depto', 'block_edificio']
 
 class SolicitanteForm(forms.ModelForm):
     class Meta:
         model = Solicitante
-        fields = ['rutSolicitante', 'primerNombre', 'segundoNombre', 'primerApellido', 'segundoApellido', 'telefono', 'edad', 'correo', 'grupoFamiliar', 'fkDireccion', 'fkDetalleDireccion']
+        fields = ['rutSolicitante', 'primerNombre', 'segundoNombre', 'primerApellido', 'segundoApellido', 'telefono', 'edad', 'correo', 'grupoFamiliar']
