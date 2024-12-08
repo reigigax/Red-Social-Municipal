@@ -7,6 +7,7 @@
         <div class="row align-items-start grid row-gap-3">
             <div class="col-auto"></div>
             <div class="col">
+                {% if dataSolicitudes %}
                 {% for solicitud in dataSolicitudes %}
                     <div class="bg-secondary-subtle card">
                         <div class="d-flex mb-3 bg-dark-subtle card-header">
@@ -45,30 +46,31 @@
                                         <div class="col-md-4 fw-light">
                                             {{ solicitud.fkRutAsistenteSocial }}
                                         </div>
-                                        <div class="col-md-4 fw-light">
+                                        <div class="col-md-4 fw-light" style="margin-bottom: 0.5rem;">
                                             {{ solicitud.fkRutSolicitante }}
+                                        </div>
+
+
+                                        <div class="col-auto fw-medium">
+                                            Tipo de Beneficio: <span class="fw-light">{{ solicitud.beneficio }}</span>
+                                        </div>
+                                        <div class="col-auto fw-medium">
+                                            N° Beneficios: <span class="fw-light">{{ solicitud.cantidadBeneficios }}</span>
+                                        </div>
+                                        <div class="col-auto fw-medium" style="margin-bottom: 0.5rem;">
+                                            Telefono: <span class="fw-light">{{ solicitud.cantidadBeneficios }}</span>  
                                         </div>
 
                                         <div class="col-md-12 fw-medium">
                                             Dirección del Hogar:
                                         </div>
 
-                                        <div class="col-md-12 fw-light" style="margin-bottom: 0.70rem;">
+                                        <div class="col-md-12 fw-light" style="margin-bottom: 0.7rem;">
                                             {{ solicitud.nombreCalle }}
                                             {{ solicitud.numeroCalle }}
                                             {{ solicitud.nombreComuna }},
                                             {{ solicitud.nombreAvenida }},
                                             {{ solicitud.nombreRegion }}
-                                        </div>
-
-                                        <div class="col-md-6 fw-medium">
-                                            Tipo de Beneficio: <span class="fw-light">{{ solicitud.beneficio }}</span>
-                                        </div>
-                                        <div class="col-md-3 fw-medium">
-                                            N° Beneficios: <span class="fw-light">{{ solicitud.cantidadBeneficios }}</span>
-                                        </div>
-                                        <div class="col-md-3 fw-medium">
-                                            Telefono: <span class="fw-light">{{ solicitud.cantidadBeneficios }}</span>  
                                         </div>
                                     </div>
                                 </div>
@@ -77,6 +79,9 @@
                         </div>
                     </div>
                 {% endfor %}
+                {% else %}
+                    <h4 class="text-center fw-light fst-italic">No se Encontraron Solicitudes Ingresadas</h4>
+                {% endif %}
             </div>
         </div>
     </div>
