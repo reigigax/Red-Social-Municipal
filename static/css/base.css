@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.default-body {
+    font-family: "Barlow Semi Condensed", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.default-custom-navbar {
+    background: linear-gradient(90deg, rgba(255,150,150,0.5) 0%, rgba(150,150,255,0.5) 100%);
+}
+
+.margin-default {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.index-card-image {
+    width: 175px;
+    height: 175px;
+}

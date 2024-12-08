@@ -1,14 +1,106 @@
 {% extends 'components/base.html' %}
 {% load static %}
 {% block content %}
-<head>
-    <title>{% block title %}Index{% endblock %}</title>
-</head>
-<div>
-    <form>
-        {{ form }}
-    </form>
-    <a href="{% url 'obtener_solicitudes' %}">Obtener Solicitudes</a>
-    <a href="{% url 'pruebas' %}">Ir a Pruebas</a>
+{% include 'components/navbar.html' %}
+
+<a href="{% url 'pruebas_base' %}">Ir a Base Pruebas</a>
+<a href="{% url 'pruebas' %}">Ir a Pruebas</a>
+<div class="margin-default">
+    <div class="container">
+        <div class="row align-items-start grid row-gap-3">
+            <div class="col-auto"></div>
+            <div class="col p-2 g-col-6">
+                <div class="card">
+                    <h6 class="text-info-emphasis bg-info-subtle card-header">Consulta de Solicitudes por Solicitante</h6>
+                    <div class="card-body text-center">
+                        <h4 class="fw-bold card-title">¿Usuario Solicitante Presenta Registros?</h4>
+                        <p class="card-text fw-light">Esta opcion permite consultar el historial de solicitudes realizadas por un usuario específico.</p>
+                        <div class="container-fluid">
+                            <form class="d-flex" method="get">
+                                <div class="container">
+                                    <div class="row align-items-start grid row-gap-3">
+                                        <div class="col">
+                                            <input class="form-control me-2" type="text" placeholder="Ingresa un RUN" name="buscarSolicitante" value="{{ request.GET.buscarSolicitante }}">
+                                        </div>
+                                        <div class="col-2 d-grid gap-2">
+                                            <button class="text-white fw-semibold btn btn-info" type="submit">Buscar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            {% for solicitante in dataSolicitante %}
+                                {{ solicitante.primerNombre }}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="p-2 g-col-6 col-sm-6 mb-3 mb-sm-0">
+                        <div class="card index-default-card">
+                            <h6 class="text-primary-emphasis bg-primary-subtle card-header">Ingreso de Usuario Solicitante</h6>
+                            <div class="card-body">
+                                <div class="container text-center">
+                                    <div class="row align-items-start">
+                                        <div class="col-auto"></div>
+                                        <div class="col">
+                                            <img class="rounded-circle index-card-image" src="{% static 'img/agregar_solicitante.png' %}" alt="ingresar_solicitante_image">
+                                            <h5 class="fw-bold card-title">Agregar Solictante</h5>
+                                            <p class="card-text fw-light">Incorporar a una nueva persona como parte del grupo familiar registrado o actualizar los datos del hogar.</p>
+                                            <div class="container">
+                                                <div class="row align-items-start grid row-gap-3">
+                                                    <div class="col-auto"></div>
+                                                    <div class="col">
+                                                        <div class="d-grid gap-2">
+                                                            <a href="{% url 'ingresar_solicitante' %}" class="fw-semibold btn btn-primary">Registrar Solicitante</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-2 g-col-6 col-sm-6 mb-3 mb-sm-0">
+                        <div class="card index-default-card">
+                            <h6 class="text-primary-emphasis bg-primary-subtle card-header">Ingreso de Solicitudes</h6>
+                            <div class="card-body">
+                                <div class="container text-center">
+                                    <div class="row align-items-start">
+                                        <div class="col-auto"></div>
+                                        <div class="col">
+                                            <img class="rounded-circle index-card-image" src="{% static 'img/ingresar_solicitud.png' %}" alt="ingresar_solicitud_image">
+                                            <h5 class="fw-bold card-title">Ingresar Solicitud</h5>
+                                            <p class="card-text fw-light">Iniciar nuevo trámite o solicitud para actualizar información sobre la composición del hogar y acceder a beneficios sociales.</p>
+                                            <div class="container">
+                                                <div class="row align-items-start grid row-gap-3">
+                                                    <div class="col-auto"></div>
+                                                    <div class="col">
+                                                        <div class="d-grid gap-2">
+                                                            <a href="{% url 'ingresar_solicitud' %}" class="fw-semibold btn btn-primary">Generar Solicitud</a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-auto"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-auto"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-auto"></div>
+        </div>
+    </div>
 </div>
 {% endblock %}

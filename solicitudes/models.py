@@ -85,6 +85,7 @@ class Solicitud(models.Model):
     numeroSolicitud = models.AutoField(db_column='n_solicitud', primary_key=True)
     nombre = models.CharField(max_length=150, blank=False, null=False)
     beneficio = models.CharField(max_length=250, blank=False, null=False)
+    descripcionBeneficio = models.CharField(max_length=500, blank=True, null=True)
     cantidadBeneficios = models.IntegerField(blank=False, null=False)
     hora = models.TimeField(blank=False, null=False)
     fecha = models.DateField(blank=False, null=False)

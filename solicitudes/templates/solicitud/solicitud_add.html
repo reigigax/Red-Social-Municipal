@@ -1,0 +1,66 @@
+{% extends 'components/base.html' %}
+{% load static %}
+{% block content %}
+{% include 'components/navbar.html' %}
+<div class="margin-default">
+    <div class="container">
+        <div class="row align-items-start grid row-gap-3">
+            <div class="col-auto"></div>
+            <div class="col">
+                <div class="bg-secondary-subtle card">
+                    <div class="d-flex mb-3 card-header">
+                        <div class="me-auto p-2">
+                            Holo
+                        </div>
+                        <div class="p-2">
+                            <div class="container text-center">
+                                <div class="row align-items-start">
+                                    <div class="col-auto fw-light">{{ fechaLocal|date:"d/m/Y" }}</div>
+                                    <div class="col-auto fw-light">{{ horaLocal }}</div>    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form class="row g-3" method="post" action="{% url 'pruebas' %}"><!--<form class="row g-3" method="post" action="{% url 'obtener_solicitudes' %}">--> 
+                            {% csrf_token %}
+                            <div class="col-md-6 d-none">
+                                {{ form.fecha.label_tag }}
+                                {{ form.fecha }}
+                            </div>
+                            <div class="col-md-6 d-none">
+                                {{ form.hora.label_tag }}
+                                {{ form.hora }}
+                            </div>
+                            <div class="col-12">
+                                {{ form.nombre.label_tag }}
+                                {{ form.nombre }}
+                            </div>
+                            <div class="col-6">
+                                {{ form.fkRutSolicitante.label_tag }}
+                                {{ form.fkRutSolicitante }}
+                            </div>
+                            <div class="col-md-6">
+                                {{ form.fkRutAsistenteSocial.label_tag }}
+                                {{ form.fkRutAsistenteSocial }}
+                            </div>
+                            <div class="col-md-4">
+                                {{ form.beneficio.label_tag }}
+                                {{ form.beneficio }}
+                            </div>
+                            <div class="col-md-2">
+                                {{ form.cantidadBeneficios.label_tag }}
+                                {{ form.cantidadBeneficios }}
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary" name="guardarSolicitud">Guardar Solicitud</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,14 +1,54 @@
 from django.shortcuts import render
+from datetime import datetime
 from .models import Solicitud, Solicitante, Detalle_Direccion, Asistente_Social, Direccion, Region, Calle, Comuna
 from .forms import SolicitudForm, SolicitanteForm, DetalleDireccionForm, AsistenteSocialForm, DireccionForm, RegionForm, ComunaForm, CalleForm
+from django.db.models import Q
 
 # Create your views here.
 
+def base(request):
+    context = {}
+    return render(request, 'components/base.html',context)
+
+def navbar(request):
+    context = {}
+    return render(request, 'components/navbar.html', context)
+
+
 def index(request):
     context = {}
-    form = SolicitudForm
-    context['form'] = form
+    queryset = (request.GET.get("buscarSolicitante"))
+    if queryset:
+        solicitante = Solicitante.objects.filter(
+            Q(rutSolicitante__icontains = queryset)
+        ).distinct()
+        context['dataSolicitante'] = solicitante
+    else:
+        context = {}
+    
     return render(request, 'solicitud/solicitud_index.html', context)
+
+def addSolicitud(request):
+    context = {}
+    formSolicitud = SolicitudForm
+
+    fecha = datetime.now().date()
+    hora = datetime.now().time()
+
+    context ['fechaLocal'] = fecha
+    context ['horaLocal'] = hora
+
+    if 'guardarSolicitud' in request.POST:
+        formSolicitud = SolicitudForm(request.POST)
+        formSolicitud.save()    
+
+    context['form'] = formSolicitud
+
+    return render(request, 'solicitud/solicitud_add.html', context)
+
+def addSolicitante(request):
+    context = {}
+    return render(request, 'solicitante/solicitante_add.html', context)
 
 def getSolicitudes(request):
     context = {}

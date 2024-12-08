@@ -1,0 +1,22 @@
+{% extends 'components/base.html' %}
+{% load static %}
+{% block content %}
+<nav class="navbar navbar-expand-lg default-custom-navbar border-bottom">
+    <div class="container text-center">
+        <div class="row align-items-start mx-auto p-2">
+            <div class="col-auto"></div>
+            <div class="col">
+                <div class="container-fluid">
+                    <div class="navbar-nav">
+                        <a class="nav-link" href="{% url 'index' %}">Inicio</a>
+                        <a class="nav-link" href="{% url 'ingresar_solicitante' %}">Usuarios</a>
+                        <a class="nav-link" href="{% url 'obtener_solicitudes' %}">Solicitudes</a>
+                        <a class="nav-link" href="{% url 'ingresar_solicitud' %}">Nueva Solicitud</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto"></div>
+        </div>
+    </div>
+</nav>
+{% endblock %}
